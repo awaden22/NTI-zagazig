@@ -5,9 +5,7 @@ const dbConnection = () => {
         .then(() => {
             console.log("connected");
         })
-        .catch((err) => {
-            console.error("err");
-        });
+        
 };
 
 export default dbConnection;

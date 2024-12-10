@@ -1,13 +1,17 @@
-import { Router } from "express";
+import {Router} from "express";
 import categoriesService from "./categories.service";
+import subcategoriesRoute from "../subcategories/subcategories.router";
+import categoriesValidation from "./categories.validation";
 
 const categoriesRouter: Router = Router();
+categoriesRouter.use('/:categoryId/subcategories', subcategoriesRoute);
 
-categoriesRouter.get('/', categoriesService.getAll);  
-categoriesRouter.post('/', categoriesService.createOne); 
+categoriesRouter.route('/')
+.get(categoriesService.getAll)
+.post(categoriesValidation.createOne,categoriesService.createOne);
 categoriesRouter.route('/:id')
-    .get(categoriesService.getOne)
-    .put(categoriesService.updataOne)  
-    .delete(categoriesService.deleteOne)
+    .get(categoriesValidation.getOne,categoriesService.getOne)
+    .put(categoriesValidation.updateOne,categoriesService.updateOne)
+    .delete(categoriesValidation.deleteOne,categoriesService.deleteOne);
 
 export default categoriesRouter;

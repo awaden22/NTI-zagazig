@@ -1,6 +1,6 @@
+import {Document} from "mongoose";
 
-export interface categories {
-    readonly name:string,
-    image:string,
+export interface categories extends Document {
+    readonly name: string;
+    image: string;
 }
-
